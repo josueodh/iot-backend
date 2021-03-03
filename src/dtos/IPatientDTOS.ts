@@ -1,0 +1,13 @@
+export default interface IPatientDTOS {
+  name: string;
+  cep: string;
+  street: string;
+  phone: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  pathology: string;
+  city: string;
+  state: string;
+  born_date: Date;
+}
