@@ -1,4 +1,4 @@
-export default interface IPatientDTOS {
+export default interface IPatientDTO {
   name: string;
   cep: string;
   street: string;
