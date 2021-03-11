@@ -27,6 +27,7 @@ class MeasurementsController {
       blood_saturation,
       patient_id,
       temperature,
+      heart_rate,
     });
 
     await measurementRepository.save(measurement);
