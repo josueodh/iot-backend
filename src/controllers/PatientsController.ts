@@ -1,4 +1,4 @@
-import IPatientDTOS from 'dtos/IPatientDTOS';
+import IPatientDTO from 'dtos/IPatientDTO';
 import AppError from 'errors/AppError';
 import Patient from 'models/Patient';
 import { getRepository } from 'typeorm';
@@ -10,7 +10,7 @@ class PatientsController {
 
     const patients = await patientsRepository.find();
 
-    return response.json({ patients });
+    return response.json(patients);
   }
 
   public async create(request: Request, response: Response) {
@@ -26,7 +26,10 @@ class PatientsController {
       city,
       state,
       born_date,
-    }: IPatientDTOS = request.body;
+      smartband,
+      start,
+      observation,
+    }: IPatientDTO = request.body;
 
     const patientsRepository = getRepository(Patient);
 
@@ -42,11 +45,14 @@ class PatientsController {
       city,
       state,
       born_date,
+      smartband,
+      start,
+      observation,
     });
 
     await patientsRepository.save(patient);
 
-    return response.json({ patient });
+    return response.json(patient);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -75,7 +81,10 @@ class PatientsController {
       city,
       state,
       born_date,
-    }: IPatientDTOS = request.body;
+      smartband,
+      start,
+      observation,
+    }: IPatientDTO = request.body;
 
     const { id } = request.params;
 
@@ -96,6 +105,9 @@ class PatientsController {
     patient.city = city;
     patient.state = state;
     patient.born_date = born_date;
+    patient.smartband = smartband;
+    patient.start = start;
+    patient.observation = observation;
 
     if (complement) {
       patient.complement = complement;

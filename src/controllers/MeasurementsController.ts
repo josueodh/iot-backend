@@ -17,6 +17,7 @@ class MeasurementsController {
       blood_saturation,
       heart_rate,
       patient_id,
+      time,
     }: ICreateMeasurementDTO = request.body;
 
     const measurementRepository = getRepository(Measurement);
@@ -28,6 +29,7 @@ class MeasurementsController {
       patient_id,
       temperature,
       heart_rate,
+      time,
     });
 
     await measurementRepository.save(measurement);

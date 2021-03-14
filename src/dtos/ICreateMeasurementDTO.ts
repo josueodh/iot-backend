@@ -5,4 +5,5 @@ export default interface ICreateMeasurementDTO {
   arterial_frequency_max: number;
   blood_saturation: number;
   patient_id: string;
+  time?: Date;
 }

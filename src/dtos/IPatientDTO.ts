@@ -10,4 +10,8 @@ export default interface IPatientDTO {
   city: string;
   state: string;
   born_date: Date;
+  smartband: string;
+  start: Date;
+  observation: string;
+  email: string;
 }

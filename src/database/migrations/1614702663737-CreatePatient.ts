@@ -30,6 +30,10 @@ export default class CreatePatient1614702663737 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'email',
+            type: 'varchar',
+          },
+          {
             name: 'number',
             type: 'varchar',
           },
@@ -57,6 +61,19 @@ export default class CreatePatient1614702663737 implements MigrationInterface {
           {
             name: 'born_date',
             type: 'timestamp with time zone',
+          },
+          {
+            name: 'smartband',
+            type: 'varchar',
+          },
+          {
+            name: 'start',
+            type: 'timestamp with time zone',
+            default: 'now()',
+          },
+          {
+            name: 'observation',
+            type: 'varchar',
           },
           {
             name: 'created_at',

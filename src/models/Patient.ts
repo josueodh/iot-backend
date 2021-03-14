@@ -24,6 +24,9 @@ class Patient {
   phone: string;
 
   @Column()
+  email: string;
+
+  @Column()
   number: string;
 
   @Column()
@@ -43,6 +46,15 @@ class Patient {
 
   @Column()
   born_date: Date;
+
+  @Column()
+  smartband: string;
+
+  @Column('date')
+  start: Date;
+
+  @Column('text')
+  observation: string;
 
   @CreateDateColumn()
   created_at: Date;
