@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import Diary from 'models/Diary';
-import Measurement from 'models/Measurement';
-import { getRepository } from 'typeorm';
+import { Request, Response } from "express";
+import Diary from "models/Diary";
+import Measurement from "models/Measurement";
+import { getRepository } from "typeorm";
 class ChartDiariesPatientController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
@@ -11,7 +11,7 @@ class ChartDiariesPatientController {
         patient_id,
       },
       order: {
-        created_at: 'ASC',
+        created_at: "ASC",
       },
     });
 

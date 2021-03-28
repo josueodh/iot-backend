@@ -6,28 +6,28 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import Patient from './Patient';
+} from "typeorm";
+import Patient from "./Patient";
 
-@Entity('diaries')
+@Entity("diaries")
 class Diary {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column('timestamp')
-  date: string;
+  @Column("timestamp")
+  date: Date;
 
-  @Column('integer')
+  @Column("integer")
   walk: number;
 
-  @Column('time')
+  @Column("time")
   sleep: string;
 
   @Column()
   patient_id: string;
 
   @ManyToOne(() => Patient)
-  @JoinColumn({ name: 'patient_id' })
+  @JoinColumn({ name: "patient_id" })
   patient: Patient;
 
   @CreateDateColumn()

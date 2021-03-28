@@ -1,8 +1,8 @@
-import IPatientDTO from 'dtos/IPatientDTO';
-import AppError from 'errors/AppError';
-import Patient from 'models/Patient';
-import { getRepository } from 'typeorm';
-import { Request, Response } from 'express';
+import IPatientDTO from "dtos/IPatientDTO";
+import AppError from "errors/AppError";
+import Patient from "models/Patient";
+import { getRepository } from "typeorm";
+import { Request, Response } from "express";
 
 class PatientsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -29,11 +29,11 @@ class PatientsController {
       smartband,
       start,
       observation,
+      email,
     }: IPatientDTO = request.body;
 
     const patientsRepository = getRepository(Patient);
-
-    const patient = await patientsRepository.create({
+    const patient = patientsRepository.create({
       name,
       cep,
       street,
@@ -48,6 +48,7 @@ class PatientsController {
       smartband,
       start,
       observation,
+      email,
     });
 
     await patientsRepository.save(patient);
@@ -62,7 +63,7 @@ class PatientsController {
     const patient = await patientsRepository.findOne(id);
 
     if (!patient) {
-      throw new AppError('Patient not found');
+      throw new AppError("Patient not found");
     }
 
     return response.json(patient);
@@ -92,7 +93,7 @@ class PatientsController {
     const patient = await patientsRepository.findOne(id);
 
     if (!patient) {
-      throw new AppError('Patient not found');
+      throw new AppError("Patient not found");
     }
 
     patient.name = name;
@@ -125,7 +126,7 @@ class PatientsController {
     const patient = await patientsRepository.findOne(id);
 
     if (!patient) {
-      throw new AppError('Patient not found');
+      throw new AppError("Patient not found");
     }
 
     patientsRepository.remove(patient);

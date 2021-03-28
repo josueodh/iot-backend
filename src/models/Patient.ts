@@ -4,11 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity('patients')
+@Entity("patients")
 class Patient {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -50,10 +50,10 @@ class Patient {
   @Column()
   smartband: string;
 
-  @Column('date')
+  @Column("date")
   start: Date;
 
-  @Column('text')
+  @Column("text")
   observation: string;
 
   @CreateDateColumn()

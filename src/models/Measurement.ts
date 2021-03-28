@@ -6,37 +6,37 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import Patient from './Patient';
+} from "typeorm";
+import Patient from "./Patient";
 
-@Entity('measurements')
+@Entity("measurements")
 class Measurement {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column('float')
+  @Column("float")
   temperature: number;
 
-  @Column('integer')
+  @Column("integer")
   heart_rate: number;
 
-  @Column('integer')
+  @Column("integer")
   arterial_frequency_min: number;
 
-  @Column('integer')
+  @Column("integer")
   arterial_frequency_max: number;
 
-  @Column('integer')
+  @Column("integer")
   blood_saturation: number;
 
-  @Column('timestamp without time zone')
+  @Column("timestamp without time zone")
   time: Date;
 
   @Column()
   patient_id: string;
 
   @ManyToOne(() => Patient)
-  @JoinColumn({ name: 'patient_id' })
+  @JoinColumn({ name: "patient_id" })
   patient: Patient;
 
   @CreateDateColumn()

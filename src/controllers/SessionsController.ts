@@ -1,5 +1,5 @@
-import { Response, Request } from 'express';
-import AuthenticateUserService from 'services/AuthenticateUserService';
+import { Response, Request } from "express";
+import AuthenticateUserService from "services/AuthenticateUserService";
 
 class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {

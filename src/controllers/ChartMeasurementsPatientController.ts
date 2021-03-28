@@ -1,12 +1,12 @@
-import AppError from 'errors/AppError';
-import { Request, Response } from 'express';
-import Measurement from 'models/Measurement';
-import { Between, Equal, getRepository, MoreThan, Not, Raw } from 'typeorm';
+import AppError from "errors/AppError";
+import { Request, Response } from "express";
+import Measurement from "models/Measurement";
+import { Between, Equal, getRepository, MoreThan, Not, Raw } from "typeorm";
 class ChartMeasurementsPatientController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
     const date = request.query.date as String;
-    const breakDate = date.split('-');
+    const breakDate = date.split("-");
     const measurementsRepository = getRepository(Measurement);
     const measurements = await measurementsRepository.find({
       where: {
@@ -17,7 +17,7 @@ class ChartMeasurementsPatientController {
         ),
       },
       order: {
-        created_at: 'ASC',
+        created_at: "ASC",
       },
     });
 

@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import ICreateMeasurementDTO from 'dtos/ICreateMeasurementDTO';
-import Measurement from 'models/Measurement';
-import { getRepository, Repository } from 'typeorm';
+import { Request, Response } from "express";
+import ICreateMeasurementDTO from "dtos/ICreateMeasurementDTO";
+import Measurement from "models/Measurement";
+import { getRepository, Repository } from "typeorm";
 class MeasurementsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const measurementRepository = getRepository(Measurement);
