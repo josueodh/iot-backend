@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import ExcelDiaryDTO from "dtos/ExcelDiaryDTO";
 import ExcelMeasurementDTO from "dtos/ExcelMeasurementDTO";
 import Measurement from "models/Measurement";
 
@@ -8,8 +9,8 @@ interface daysProps {
 interface arrayOfDiariesDay {
   date: Date;
 }
-export const uniqueDay = (arrayOfDays: daysProps[]) => {
-  const days = arrayOfDays.map(day => format(day.created_at, "dd/MM/yyyy"));
+export const uniqueDay = (arrayOfDays: any[]) => {
+  const days = arrayOfDays.map(day => format(day.time, "dd/MM/yyyy"));
 
   const uniqueDays = Array.from(new Set(days));
 
@@ -61,6 +62,12 @@ const getAVGArterialMax = (measurements: ExcelMeasurementDTO[]) => {
   );
 };
 
+const getAVGWalk = (diaries: ExcelDiaryDTO[]) => {
+  return (
+    diaries.reduce((total, diariesWalk) => total + diariesWalk.walk, 0) /
+    diaries.length
+  );
+};
 const getAVGArterialMin = (measurements: ExcelMeasurementDTO[]) => {
   return (
     measurements.reduce(
@@ -76,10 +83,9 @@ export const excelMeasurementsColumns = (
 ) => {
   const measurementsForDays = days.map(day => {
     return measurements.filter(measurement => {
-      return format(measurement.created_at, "dd/MM/yyyy") === day;
+      return format(measurement.time, "dd/MM/yyyy") === day;
     });
   });
-
   return measurementsForDays.map(measurement => {
     return {
       temperature: getAVGTemperature(measurement),
@@ -91,12 +97,16 @@ export const excelMeasurementsColumns = (
   });
 };
 
-export const weekRowsMeasurements = (measurements: ExcelMeasurementDTO[]) => {
+export const weekRows = (
+  measurements: ExcelMeasurementDTO[],
+  diaries: ExcelDiaryDTO[],
+) => {
   return {
     temperature: getAVGTemperature(measurements),
     heart_rate: getAVGHeart(measurements),
     blood_saturation: getAVGSaturation(measurements),
     arterial_frequency_max: getAVGArterialMax(measurements),
     arterial_frequency_min: getAVGArterialMin(measurements),
+    walk: getAVGWalk(diaries),
   };
 };

@@ -16,26 +16,37 @@ export default class CreatePatient1614702663737 implements MigrationInterface {
           {
             name: "name",
             type: "varchar",
+            isNullable: true,
+          },
+          {
+            name: "cpf",
+            type: "varchar",
+            isUnique: true,
           },
           {
             name: "cep",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "street",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "phone",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "email",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "number",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "complement",
@@ -45,18 +56,22 @@ export default class CreatePatient1614702663737 implements MigrationInterface {
           {
             name: "neighborhood",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "pathology",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "city",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "state",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "born_date",
@@ -65,6 +80,7 @@ export default class CreatePatient1614702663737 implements MigrationInterface {
           {
             name: "smartband",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "start",

@@ -8,7 +8,6 @@ const patientsController = new PatientsController();
 
 patientsRouter.use(ensureAuthenticated);
 patientsRouter.get("/", patientsController.index);
-console.log("alo");
 patientsRouter.post("/", patientsController.create);
 patientsRouter.get("/:id", patientsController.show);
 patientsRouter.put("/:id", patientsController.update);

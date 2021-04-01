@@ -1,7 +1,7 @@
-import AppError from "errors/AppError";
 import { Request, Response } from "express";
 import Measurement from "models/Measurement";
-import { Between, Equal, getRepository, MoreThan, Not, Raw } from "typeorm";
+import { getRepository, Raw } from "typeorm";
+import { uniqueDay } from "../utils/helper";
 class ChartMeasurementsPatientController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
@@ -11,17 +11,20 @@ class ChartMeasurementsPatientController {
     const measurements = await measurementsRepository.find({
       where: {
         patient_id,
-        created_at: Raw(
+        time: Raw(
           dateFieldName =>
             `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${breakDate[2]}-${breakDate[1]}-${breakDate[0]}'`,
         ),
       },
       order: {
-        created_at: "ASC",
+        time: "ASC",
       },
     });
-
-    return response.json(measurements);
+    const measurementsDay = await measurementsRepository.find({
+      where: { patient_id },
+    });
+    const days = uniqueDay(measurementsDay);
+    return response.json({ measurements, days });
   }
 }
 

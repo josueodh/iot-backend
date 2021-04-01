@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Diary from "models/Diary";
-import Measurement from "models/Measurement";
 import { getRepository } from "typeorm";
 class ChartDiariesPatientController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -11,7 +10,7 @@ class ChartDiariesPatientController {
         patient_id,
       },
       order: {
-        created_at: "ASC",
+        date: "ASC",
       },
     });
 

@@ -16,6 +16,8 @@ class Patient {
 
   @Column()
   cep: string;
+  @Column()
+  cpf: string;
 
   @Column()
   street: string;

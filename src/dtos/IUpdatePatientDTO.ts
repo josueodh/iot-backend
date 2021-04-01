@@ -1,5 +1,6 @@
-export default interface IPatientDTO {
+export default interface IUpdatePatientDTO {
   name: string;
+  cpf: string;
   cep: string;
   street: string;
   phone: string;

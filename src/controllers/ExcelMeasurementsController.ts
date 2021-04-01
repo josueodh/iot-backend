@@ -4,12 +4,11 @@ import Diary from "models/Diary";
 import Measurement from "models/Measurement";
 import { getRepository } from "typeorm";
 import ExcelJS from "exceljs";
-import { format } from "date-fns";
 import {
   excelMeasurementsColumns,
   uniqueDay,
   uniqueDiariesDay,
-  weekRowsMeasurements,
+  weekRows,
 } from "utils/helper";
 import { weekHeaderExcel } from "utils/weekHeaderExcel";
 interface excelJSFormat {
@@ -24,16 +23,17 @@ class ExcelMeasurementsController {
     const diariesRepository = getRepository(Diary);
     const measurements = await measurementsRepository.find({
       where: { patient_id },
-      order: { created_at: "ASC" },
+      order: { time: "ASC" },
     });
     const diaries = await diariesRepository.find({
       where: { patient_id },
-      order: { created_at: "ASC" },
+      order: { date: "ASC" },
     });
     const measurementDay = uniqueDay(measurements);
     const diaryDay = uniqueDiariesDay(diaries);
+    console.log(measurementDay);
     const rows = excelMeasurementsColumns(measurements, measurementDay);
-    const weekRows = weekRowsMeasurements(rows);
+    const excelWeekRows = weekRows(rows, diaries);
     const excelRows: any = [];
     diaries.map(diary => {
       excelRows.push(diary.walk, diary.sleep);
@@ -46,12 +46,7 @@ class ExcelMeasurementsController {
         row.blood_saturation,
       );
     });
-    excelRows.push(
-      weekRows.temperature,
-      weekRows.heart_rate,
-      weekRows.arterial_frequency_max + "/" + weekRows.arterial_frequency_min,
-      weekRows.blood_saturation,
-    );
+
     let headerExcel: excelJSFormat[] = [];
     diaryDay.forEach(day => {
       headerExcel.push(
@@ -79,14 +74,25 @@ class ExcelMeasurementsController {
         width: 20,
       });
       headerExcel.push({
-        header: day + " - Saturação Sanguinea",
+        header: day + " - SP02",
         width: 20,
       });
     });
+    excelRows.push(
+      excelWeekRows.walk,
+      excelWeekRows.walk,
+      excelWeekRows.temperature,
+      excelWeekRows.heart_rate,
+      excelWeekRows.arterial_frequency_max +
+        "/" +
+        excelWeekRows.arterial_frequency_min,
+      excelWeekRows.blood_saturation,
+    );
     headerExcel = headerExcel.concat(weekHeaderExcel);
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Planilha Paciente");
     worksheet.columns = headerExcel;
+
     worksheet.addRow(excelRows);
 
     await workbook.xlsx.writeFile("users.xlsx");

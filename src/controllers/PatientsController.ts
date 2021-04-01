@@ -1,8 +1,9 @@
-import IPatientDTO from "dtos/IPatientDTO";
 import AppError from "errors/AppError";
 import Patient from "models/Patient";
 import { getRepository } from "typeorm";
 import { Request, Response } from "express";
+import { ICreatePatientDTO } from "dtos/ICreatePatientDTO";
+import IUpdatePatientDTO from "dtos/IUpdatePatientDTO";
 
 class PatientsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -30,9 +31,17 @@ class PatientsController {
       start,
       observation,
       email,
-    }: IPatientDTO = request.body;
+      cpf,
+    }: ICreatePatientDTO = request.body;
 
     const patientsRepository = getRepository(Patient);
+    const findPatient = await patientsRepository.findOne({
+      where: { cpf },
+    });
+
+    if (findPatient) {
+      throw new AppError("Patient already exists");
+    }
     const patient = patientsRepository.create({
       name,
       cep,
@@ -49,6 +58,7 @@ class PatientsController {
       start,
       observation,
       email,
+      cpf,
     });
 
     await patientsRepository.save(patient);
@@ -85,7 +95,8 @@ class PatientsController {
       smartband,
       start,
       observation,
-    }: IPatientDTO = request.body;
+      cpf,
+    }: IUpdatePatientDTO = request.body;
 
     const { id } = request.params;
 

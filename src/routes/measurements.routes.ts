@@ -16,5 +16,8 @@ measurementsRouter.get(
   "/chart/:patient_id",
   chartMeasurementsPatientController.index,
 );
-measurementsRouter.get("/test/:patient_id", excelMeasurementsController.create);
+measurementsRouter.get(
+  "/excel/:patient_id",
+  excelMeasurementsController.create,
+);
 export default measurementsRouter;

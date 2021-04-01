@@ -25,7 +25,7 @@ export const weekHeaderExcel: headerExcel[] = [
     width: 20,
   },
   {
-    header: "Saturação semana",
+    header: "SP02 semana",
     width: 20,
   },
 ];
