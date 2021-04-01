@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Measurement from "models/Measurement";
+import Measurement from "../models/Measurement";
 import { getRepository, Raw } from "typeorm";
 import { uniqueDay } from "../utils/helper";
 class ChartMeasurementsPatientController {

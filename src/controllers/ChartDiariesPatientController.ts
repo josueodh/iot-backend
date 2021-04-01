@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Diary from "models/Diary";
+import Diary from "../models/Diary";
 import { getRepository } from "typeorm";
 class ChartDiariesPatientController {
   public async index(request: Request, response: Response): Promise<Response> {

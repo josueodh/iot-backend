@@ -1,9 +1,9 @@
-import AppError from "errors/AppError";
-import Patient from "models/Patient";
+import AppError from "../errors/AppError";
+import Patient from "../models/Patient";
 import { getRepository } from "typeorm";
 import { Request, Response } from "express";
-import { ICreatePatientDTO } from "dtos/ICreatePatientDTO";
-import IUpdatePatientDTO from "dtos/IUpdatePatientDTO";
+import { ICreatePatientDTO } from "../dtos/ICreatePatientDTO";
+import IUpdatePatientDTO from "../dtos/IUpdatePatientDTO";
 
 class PatientsController {
   public async index(request: Request, response: Response): Promise<Response> {

@@ -1,7 +1,7 @@
-import ChartDiariesPatientController from "controllers/ChartDiariesPatientController";
-import DiariesController from "controllers/DairiesController";
+import ChartDiariesPatientController from "../controllers/ChartDiariesPatientController";
+import DiariesController from "../controllers/DairiesController";
 import { Router } from "express";
-import ensureAuthenticated from "middleware/ensureAuthenticated";
+import ensureAuthenticated from "../middleware/ensureAuthenticated";
 
 const diariesRouter = Router();
 const diariesController = new DiariesController();

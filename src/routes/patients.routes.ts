@@ -1,7 +1,6 @@
-import PatientsController from "controllers/PatientsController";
-import UsersController from "controllers/UsersController";
+import PatientsController from "../controllers/PatientsController";
 import { Router } from "express";
-import ensureAuthenticated from "middleware/ensureAuthenticated";
+import ensureAuthenticated from "../middleware/ensureAuthenticated";
 
 const patientsRouter = Router();
 const patientsController = new PatientsController();

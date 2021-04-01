@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import "reflect-metadata";
 
 import express, { Request, Response, NextFunction } from "express";
@@ -10,6 +11,7 @@ import "./database";
 
 const app = express();
 
+dotenv.config();
 app.use(cors());
 app.use(express.json());
 app.use(routes);

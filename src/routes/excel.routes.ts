@@ -1,6 +1,6 @@
-import ExcelMeasurementsController from "controllers/ExcelMeasurementsController";
+import ExcelMeasurementsController from "../controllers/ExcelMeasurementsController";
 import { Router } from "express";
-import ensureAuthenticated from "middleware/ensureAuthenticated";
+import ensureAuthenticated from "../middleware/ensureAuthenticated";
 
 const excelRouter = Router();
 const excelMeasurementsController = new ExcelMeasurementsController();

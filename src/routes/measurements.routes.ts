@@ -1,8 +1,8 @@
-import ChartMeasurementsPatientController from "controllers/ChartMeasurementsPatientController";
-import ExcelMeasurementsController from "controllers/ExcelMeasurementsController";
-import MeasurementsController from "controllers/MeasurementsController";
+import ChartMeasurementsPatientController from "../controllers/ChartMeasurementsPatientController";
+import ExcelMeasurementsController from "../controllers/ExcelMeasurementsController";
+import MeasurementsController from "../controllers/MeasurementsController";
 import { Router } from "express";
-import ensureAuthenticated from "middleware/ensureAuthenticated";
+import ensureAuthenticated from "../middleware/ensureAuthenticated";
 
 const measurementsRouter = Router();
 const measurementsController = new MeasurementsController();

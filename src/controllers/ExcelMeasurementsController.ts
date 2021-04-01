@@ -1,7 +1,6 @@
-import ICreateDiaryDTO from "dtos/ICreateDiaryDTO";
 import { Request, Response } from "express";
-import Diary from "models/Diary";
-import Measurement from "models/Measurement";
+import Diary from "../models/Diary";
+import Measurement from "../models/Measurement";
 import { getRepository } from "typeorm";
 import ExcelJS from "exceljs";
 import {
@@ -9,8 +8,8 @@ import {
   uniqueDay,
   uniqueDiariesDay,
   weekRows,
-} from "utils/helper";
-import { weekHeaderExcel } from "utils/weekHeaderExcel";
+} from "../utils/helper";
+import { weekHeaderExcel } from "../utils/weekHeaderExcel";
 interface excelJSFormat {
   header: string;
   width: number;

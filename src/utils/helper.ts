@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import ExcelDiaryDTO from "dtos/ExcelDiaryDTO";
-import ExcelMeasurementDTO from "dtos/ExcelMeasurementDTO";
-import Measurement from "models/Measurement";
+import ExcelDiaryDTO from "../dtos/ExcelDiaryDTO";
+import ExcelMeasurementDTO from "../dtos/ExcelMeasurementDTO";
+import Measurement from "../models/Measurement";
 
 interface daysProps {
   created_at: Date;

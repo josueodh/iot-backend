@@ -1,8 +1,8 @@
 import format from "date-fns/format";
-import ICreateDiaryDTO from "dtos/ICreateDiaryDTO";
-import AppError from "errors/AppError";
+import ICreateDiaryDTO from "../dtos/ICreateDiaryDTO";
+import AppError from "../errors/AppError";
 import { Request, Response } from "express";
-import Diary from "models/Diary";
+import Diary from "../models/Diary";
 import { getRepository, Raw } from "typeorm";
 class DiariesController {
   public async index(request: Request, response: Response): Promise<Response> {

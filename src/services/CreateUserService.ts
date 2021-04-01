@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
-import AppError from "errors/AppError";
-import User from "models/User";
+import AppError from "../errors/AppError";
+import User from "../models/User";
 import { getRepository } from "typeorm";
 
 interface IRequest {
