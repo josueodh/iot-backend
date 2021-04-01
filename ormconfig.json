@@ -2,9 +2,15 @@
   "type": "postgres",
   "url": "postgres://nonlkfihcpyofc:3a24a769dcc63ed53690ce73771ef1153d277a7165d5ae232855a94983ab2aec@ec2-18-214-208-89.compute-1.amazonaws.com:5432/d5panvbs6e0kfp",
   "ssl": true,
+  "allowJs": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
   "entities": ["./dist/models/*.js"],
   "migrations": ["./dist/database/migrations/*.js"],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./dist/database/migrations"
   }
 }

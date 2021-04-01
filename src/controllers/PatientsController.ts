@@ -124,7 +124,7 @@ class PatientsController {
     if (complement) {
       patient.complement = complement;
     } else {
-      delete patient.complement;
+      patient.complement = "";
     }
 
     patientsRepository.save(patient);
