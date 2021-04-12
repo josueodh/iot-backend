@@ -16,10 +16,7 @@ interface excelJSFormat {
 }
 
 class ExcelMeasurementsController {
-  public async create(
-    request: Request,
-    response: Response,
-  ): Promise<Response | void> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
     const measurementsRepository = getRepository(Measurement);
     const diariesRepository = getRepository(Diary);
@@ -67,18 +64,9 @@ class ExcelMeasurementsController {
       excelWeekRows.arterial_frequency_min,
       excelWeekRows.blood_saturation,
     ]);
-    response.setHeader(
-      "Content-Type",
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    );
-    response.setHeader(
-      "Content-Disposition",
-      "attachment; filename=" + "tutorials.xlsx",
-    );
 
-    return workbook.xlsx.write(response).then(function () {
-      response.status(200).end();
-    });
+    await workbook.xlsx.writeFile("users.xlsx");
+    return response.status(200).json();
   }
 }
 
