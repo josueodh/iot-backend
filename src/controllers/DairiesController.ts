@@ -34,7 +34,7 @@ class DiariesController {
     const parseSleep: any = sleep.split(":");
     const diary = diariesRepository.create({
       patient_id,
-      sleep: parseSleep[0] * 60 + parseSleep[1],
+      sleep: (parseSleep[0] * 60 + parseSleep[1]) / 60,
       walk,
       date,
     });

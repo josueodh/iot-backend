@@ -3,23 +3,17 @@ import Diary from "../models/Diary";
 import Measurement from "../models/Measurement";
 import { getRepository } from "typeorm";
 import ExcelJS from "exceljs";
-import {
-  excelMeasurementsColumns,
-  uniqueDay,
-  uniqueDiariesDay,
-  weekRows,
-} from "../utils/helper";
+import { excelMeasurementsColumns, uniqueDay, weekRows } from "../utils/helper";
 import { weekHeaderExcel } from "../utils/weekHeaderExcel";
-interface excelJSFormat {
-  header: string;
-  width: number;
-}
+import Patient from "../models/Patient";
 
 class ExcelMeasurementsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
     const measurementsRepository = getRepository(Measurement);
     const diariesRepository = getRepository(Diary);
+    const patientsRepository = getRepository(Patient);
+    const patient = await patientsRepository.findOne({ id: patient_id });
     const measurements = await measurementsRepository.find({
       where: { patient_id },
       order: { time: "ASC" },
@@ -29,7 +23,6 @@ class ExcelMeasurementsController {
       order: { date: "ASC" },
     });
     const measurementDay = uniqueDay(measurements);
-    const diaryDay = uniqueDiariesDay(diaries);
     const rows = excelMeasurementsColumns(measurements, measurementDay);
     const excelWeekRows = weekRows(rows, diaries);
     const excelRows: any = [];
@@ -37,11 +30,9 @@ class ExcelMeasurementsController {
       excelRows.push(diary.walk, diary.sleep);
     });
 
-    let headerExcel: excelJSFormat[] = [];
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Planilha Paciente");
     worksheet.columns = weekHeaderExcel;
-    console.log(diaries);
     rows.forEach((row, index) => {
       worksheet.addRow([
         measurementDay[index],
@@ -65,7 +56,17 @@ class ExcelMeasurementsController {
       excelWeekRows.blood_saturation,
     ]);
 
-    await workbook.xlsx.writeFile("users.xlsx");
+    if (patient) {
+      worksheet.addRow([
+        "Paciente",
+        `Nome: ${patient.name}`,
+        `Telefone: ${patient.phone}`,
+        `E-mail: ${patient.email}`,
+        `CPF: ${patient.cpf}`,
+      ]);
+    }
+
+    await workbook.xlsx.writeFile(`xlsx/${patient?.cpf}.xlsx`);
     return response.status(200).json();
   }
 }
