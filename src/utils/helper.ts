@@ -68,6 +68,13 @@ const getAVGWalk = (diaries: ExcelDiaryDTO[]) => {
     diaries.length
   );
 };
+
+const getAVGSleep = (diaries: ExcelDiaryDTO[]) => {
+  return (
+    diaries.reduce((total, diariesSleep) => total + diariesSleep.sleep, 0) /
+    diaries.length
+  );
+};
 const getAVGArterialMin = (measurements: ExcelMeasurementDTO[]) => {
   return (
     measurements.reduce(
@@ -108,5 +115,6 @@ export const weekRows = (
     arterial_frequency_max: getAVGArterialMax(measurements),
     arterial_frequency_min: getAVGArterialMin(measurements),
     walk: getAVGWalk(diaries),
+    sleep: getAVGSleep(diaries),
   };
 };

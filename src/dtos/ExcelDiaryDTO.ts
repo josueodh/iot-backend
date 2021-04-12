@@ -1,4 +1,4 @@
 export default interface ExcelDiaryDTO {
-  sleep: string;
+  sleep: number;
   walk: number;
 }

@@ -24,7 +24,7 @@ export default class CreateDiary1615145318637 implements MigrationInterface {
           },
           {
             name: "sleep",
-            type: "time",
+            type: "integer",
           },
           {
             name: "patient_id",

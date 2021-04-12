@@ -5,27 +5,35 @@ interface headerExcel {
 
 export const weekHeaderExcel: headerExcel[] = [
   {
-    header: "Passos semana",
+    header: "Data",
     width: 20,
   },
   {
-    header: "Sono semana",
+    header: "Passos",
     width: 20,
   },
   {
-    header: "Temperatura semana",
+    header: "Sono",
     width: 20,
   },
   {
-    header: "FC semana",
+    header: "Temperatura",
     width: 20,
   },
   {
-    header: "FA semana",
+    header: "FC",
     width: 20,
   },
   {
-    header: "SP02 semana",
+    header: "Cistólica",
+    width: 20,
+  },
+  {
+    header: "Diastólica",
+    width: 20,
+  },
+  {
+    header: "SPO2",
     width: 20,
   },
 ];

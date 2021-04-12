@@ -20,8 +20,8 @@ class Diary {
   @Column("integer")
   walk: number;
 
-  @Column("time")
-  sleep: string;
+  @Column()
+  sleep: number;
 
   @Column()
   patient_id: string;

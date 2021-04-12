@@ -31,9 +31,10 @@ class DiariesController {
     if (checkIfExistDiaryInTheSameDate) {
       throw new AppError("This date already has another diary");
     }
+    const parseSleep: any = sleep.split(":");
     const diary = diariesRepository.create({
       patient_id,
-      sleep,
+      sleep: parseSleep[0] * 60 + parseSleep[1],
       walk,
       date,
     });
