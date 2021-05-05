@@ -1,6 +1,6 @@
 export default interface ICreateDiaryDTO {
   walk: number;
-  sleep: string;
+  sleep: number;
   patient_id: string;
   date: Date;
 }

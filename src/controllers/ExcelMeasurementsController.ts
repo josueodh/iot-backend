@@ -6,7 +6,9 @@ import ExcelJS from "exceljs";
 import { excelMeasurementsColumns, uniqueDay, weekRows } from "../utils/helper";
 import { weekHeaderExcel } from "../utils/weekHeaderExcel";
 import Patient from "../models/Patient";
-
+import * as aws from "aws-sdk";
+import * as Stream from "stream";
+import fs from "fs";
 class ExcelMeasurementsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { patient_id } = request.params;
@@ -65,8 +67,46 @@ class ExcelMeasurementsController {
         `CPF: ${patient.cpf}`,
       ]);
     }
+    const s3 = new aws.S3({
+      region: process.env.AWS_BUCKET_REGION,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    });
 
-    await workbook.xlsx.writeFile(`xlsx/${patient?.cpf}.xlsx`);
+    const stream = new Stream.PassThrough();
+
+    workbook.xlsx
+      .write(stream)
+      .then(() => {
+        return s3
+          .upload({
+            Key: `${patient?.cpf}.xlsx`,
+            Bucket: "ufjf-healthier",
+            Body: stream,
+            ContentType:
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          })
+          .promise();
+      })
+      .catch(function (e) {
+        console.log(e.message);
+      })
+      .then(
+        function () {
+          console.log("after a catch the chain is restored");
+        },
+        function () {
+          console.log("Not fired due to the catch");
+        },
+      );
+    var params = {
+      Key: `${patient?.cpf}.xlsx`,
+      Bucket: "ufjf-healthier",
+    };
+
+    response.attachment("ufjf-healthier");
+    var fileStream = s3.getObject(params).createReadStream();
+    fileStream.pipe(response);
     return response.status(200).json();
   }
 }
